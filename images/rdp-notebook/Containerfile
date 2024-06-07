@@ -109,7 +109,7 @@ COPY packages/requirements.txt packages/cisl-cloud-base.yml /tmp/
 # Install pip packages
 RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
 
-# Copy the condarc file over to define conda congiruation
+# Copy the initial condarc file over to define conda congiruation and place base envs in /srv/conda
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
 # Create the conda envs with mamba to increase installation speed
