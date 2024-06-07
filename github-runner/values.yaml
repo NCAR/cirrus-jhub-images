@@ -1,0 +1,12 @@
+replicaCount: 1
+
+webapp:
+  name: ccpp-jhub-img-gh-runner
+  group: ccpp-jhub-img-gh-runner
+  container: 
+    imagePullPolicy: Always
+    port: 80
+    memory: 10G
+    cpu: 2    
+    image: hub.k8s.ucar.edu/ncote/github-runner:2024-06-04.00.56
+  repo: NCAR/ccpp-jhub-images
