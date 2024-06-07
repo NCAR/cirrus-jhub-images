@@ -33,5 +33,5 @@ spec:
         - name: TOKEN
           valueFrom:
             secretKeyRef:
-              name: ncote-github-token
+              name: ncote-ccpp-jhub-img-token
               key: token
