@@ -12,8 +12,7 @@ make
 openssh-clients
 pandoc
 sudo
+tigervnc-server
 tini
 vim
-dbus-x11
-firefox
 wget
