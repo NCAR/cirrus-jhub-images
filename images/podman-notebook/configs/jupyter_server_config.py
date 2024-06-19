@@ -66,4 +66,4 @@ c.CondaKernelSpecManager.name_format = '{environment} ({0})'
 c.MultiKernelManager.default_kernel_name = 'conda-env-podman-base-py' 
 
 ## Allow access to hidden files
-c.ContentsManager.allow_hidden = False
+c.ContentsManager.allow_hidden = True
