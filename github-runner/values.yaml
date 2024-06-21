@@ -3,6 +3,10 @@ replicaCount: 1
 webapp:
   name: ccpp-jhub-img-gh-runner
   group: ccpp-jhub-img-gh-runner
+  autoscale:
+    minReplicaCount: 1
+    maxReplicaCount: 10
+    cpuAverageUtilization: 50
   container: 
     imagePullPolicy: Always
     port: 80
