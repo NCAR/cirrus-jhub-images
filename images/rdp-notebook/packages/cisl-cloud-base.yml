@@ -65,7 +65,7 @@ dependencies:
   - mpi4py=3.1.4=py310h37cc914_0
   - nb_conda_kernels
   - nbstripout=0.6.1=pyhd8ed1ab_0
-  - nc-time-axis=1.4.1=pyhd8ed1ab_0, no mpi on our hardware
+  - nc-time-axis=1.4.1=pyhd8ed1ab_0
   - netcdf4=1.6.4=nompi_py310hba70d50_103
   - numba=0.57.1=py310h0f6aa51_0
   - numcodecs=0.11.0=py310heca2aa9_1
