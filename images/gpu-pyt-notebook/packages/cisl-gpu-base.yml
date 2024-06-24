@@ -22,13 +22,13 @@ dependencies:
   # Same version as NPL
   - boto3=1.28.2=pyhd8ed1ab_0
   # Same version as NPL
-  - ca-certificates=2023.7.22=hbcca054_0
+  - ca-certificates=2024.6.2=hbcca054_0
   # Same version as NPL
   - cdsapi=0.6.1=pyhd8ed1ab_0
   # Same version as NPL
   - celluloid=0.2.0=pyhd8ed1ab_0
   # Same version as NPL
-  - certifi=2023.7.22=pyhd8ed1ab_0
+  - certifi=2024.6.2=pyhd8ed1ab_0
   # Same version as NPL
   - cfgrib=0.9.10.4=pyhd8ed1ab_0
   # Same version as NPL
@@ -64,7 +64,7 @@ dependencies:
   # Same version as NPL
   - geoviews=1.10.0=pyhd8ed1ab_0
   # Same version as NPL
-  - gh-scoped-creds
+  - gh-scoped-creds=4.1=pyhd8ed1ab_0
   - ghp-import=2.1.0=pyhd8ed1ab_0
   # Same version as NPL
   - globus-cli=3.15.0=pyhd8ed1ab_0
