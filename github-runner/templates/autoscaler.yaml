@@ -17,10 +17,10 @@ spec:
       target:
         type: Utilization
         averageUtilization: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
-    behavior:
-      scaleDown:
-        stabilizationWindowSeconds: 300
-        policies:
-        - type: Pods
-          value: 1
-          periodSeconds: 300
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Pods
+        value: 1
+        periodSeconds: 300
