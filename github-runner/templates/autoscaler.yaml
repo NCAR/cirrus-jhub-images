@@ -20,6 +20,13 @@ spec:
     scaleUp:
       stabilizationWindowSeconds: 0
       policies:
-      - type: Percent
-        value: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
-        periodSeconds: 5
+      - type: Pods
+        value: 1
+        periodSeconds: 15
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
