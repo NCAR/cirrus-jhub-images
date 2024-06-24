@@ -12,6 +12,9 @@ on:
     branches:
       - dev
 
+env:
+  BRANCH_NAME: ${{ github.ref_name }}
+
 # Define the actions that are going to take place as part of this workflow    
 jobs:
   # Name the job(s)
@@ -31,6 +34,6 @@ jobs:
         run: |
           podman build -f images/base-notebook/Containerfile -t hub.k8s.ucar.edu/cislcloudpilot/cisl-cloud-base:${{ steps.date.outputs.date }} images/base-notebook/. --no-cache --format=docker
       - name: Create pull request to merge dev in to main
-        run: gh pr create -B main -H dev --title 'Test build successful. Merge CPU notebook update from dev into main' --body 'Created by Github action'
+        run: gh pr view ${{ env.BRANCH_NAME }} && gh pr reopen ${{ env.BRANCH_NAME }} || gh pr create --fill -B main -H ${{ env.BRANCH_NAME }} --title 'Test build successful. Merge CPU notebook update from dev into main' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
