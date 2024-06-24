@@ -113,6 +113,9 @@ RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
 # and places base envs in /srv/conda
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
+# Update conda
+RUN conda update -n base -c conda-forge conda
+
 # Create the conda envs with mamba to increase installation speed
 RUN mamba env create --name ${CONDA_ENV} -f cisl-cloud-base.yml \
     && mamba clean -afy \
