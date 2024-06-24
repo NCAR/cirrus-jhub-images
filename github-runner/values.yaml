@@ -1,5 +1,3 @@
-replicaCount: 1
-
 webapp:
   name: ccpp-jhub-img-gh-runner
   group: ccpp-jhub-img-gh-runner
