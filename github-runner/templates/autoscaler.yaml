@@ -10,13 +10,6 @@ spec:
     name: {{ .Values.webapp.name }}
   minReplicas: {{ .Values.webapp.autoscale.minReplicaCount }}
   maxReplicas: {{ .Values.webapp.autoscale.maxReplicaCount }}
-  metrics:
-  - type: Resource
-    resource:
-      name: cpu
-      target:
-        type: Utilization
-        averageUtilization: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
   behavior:
     scaleDown:
       stabilizationWindowSeconds: 300
@@ -24,3 +17,8 @@ spec:
       - type: Pods
         value: 1
         periodSeconds: 300
+    scaleUp:
+      stabilizationWindowSeconds: 0
+      policies:
+      - type: Percent
+        value: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
