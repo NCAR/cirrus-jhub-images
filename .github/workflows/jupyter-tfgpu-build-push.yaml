@@ -17,7 +17,7 @@ jobs:
   # Name the job(s)
   podman-build-push-gpu-tf-notebook:
     # Define where the job should run in this case it will be run on the latest ubuntu image
-    runs-on: ccpp-images-arc
+    runs-on: self-hosted
     # Set the steps to take in order
     steps:
       # Step 1 is to checkout the github repo used to build the Containerfile
