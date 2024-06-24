@@ -22,3 +22,4 @@ spec:
       policies:
       - type: Percent
         value: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
+        periodSeconds: 5
