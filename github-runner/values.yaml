@@ -4,7 +4,7 @@ webapp:
   autoscale:
     minReplicaCount: 1
     maxReplicaCount: 10
-    cpuAverageUtilization: 20
+    cpuAverageUtilization: 26
   container: 
     imagePullPolicy: Always
     port: 80
