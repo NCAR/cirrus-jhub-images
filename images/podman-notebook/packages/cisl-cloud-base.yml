@@ -50,7 +50,7 @@ dependencies:
   - intake-esm=2023.7.7=pyhd8ed1ab_0
   - intake-thredds=2022.8.19=pyhd8ed1ab_0
   - intake-xarray=0.7.0=pyhd8ed1ab_0
-  - ipympl=0.9.3=pyhd8ed1ab_0 in GitHub
+  - ipympl=0.9.3=pyhd8ed1ab_0
   - ipykernel=6.24.0=pyh71e2992_0
   - ipywidgets-bokeh=1.5.0=pyhd8ed1ab_0
   - iris=3.6.1=pyha770c72_0

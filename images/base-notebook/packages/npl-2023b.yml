@@ -53,7 +53,7 @@ dependencies:
   - matplotlib=3.7.2=py310hff52083_0
   - mpi4py=3.1.4=py310h37cc914_0
   - nc-time-axis=1.4.1=pyhd8ed1ab_0
-  - ncar-jobqueue=2021.4.14=pyh44b312d_0, no mpi on our hardware
+  - ncar-jobqueue=2021.4.14=pyh44b312d_0
   - netcdf4=1.6.4=nompi_py310hba70d50_103
   - numba=0.57.1=py310h0f6aa51_0
   - numcodecs=0.11.0=py310heca2aa9_1
