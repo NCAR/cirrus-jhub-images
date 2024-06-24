@@ -15,5 +15,5 @@ spec:
     resource:
       name: cpu
       target:
-        type: AverageValue
-        averageValue: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
+        type: Utilization
+        averageUtilization: {{ .Values.webapp.autoscale.cpuAverageUtilization }}
