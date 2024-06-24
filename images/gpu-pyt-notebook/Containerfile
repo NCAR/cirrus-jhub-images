@@ -117,6 +117,9 @@ RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
 # Copy the condarc file over to define conda configuration
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
+# Update conda
+RUN conda update -n base -c conda-forge conda
+
 # Create the conda envs with mamba to increase installation speed
 RUN CONDA_OVERRIDE_CUDA="12.3" mamba env create --name ${CONDA_ENV} -f cisl-gpu-base.yml \
     && mamba clean -afy \

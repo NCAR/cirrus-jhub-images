@@ -34,6 +34,6 @@ jobs:
         run: |
           podman build -f images/gpu-pyt-notebook/Containerfile -t hub.k8s.ucar.edu/cislcloudpilot/cisl-cloud-gpu-pyt:${{ steps.date.outputs.date }} images/gpu-pyt-notebook/. --no-cache --format=docker
       - name: Create pull request to merge dev in to main
-        run: gh pr view ${{ env.BRANCH_NAME }} && gh pr reopen ${{ env.BRANCH_NAME }} || gh pr create --fill -B main -H ${{ env.BRANCH_NAME }}  --title 'Test build successful. Merge PyTorch notebook update from dev into main' --body 'Created by Github action'
+        run: gh pr view ${{ env.BRANCH_NAME }} && gh pr reopen ${{ env.BRANCH_NAME }} || gh pr create -B main -H ${{ env.BRANCH_NAME }}  --title 'Test build successful. Merge PyTorch notebook update from dev into main' --body 'Created by Github action'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
