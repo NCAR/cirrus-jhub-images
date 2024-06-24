@@ -45,9 +45,6 @@ dependencies:
   - r-climate4r.climdex=0.2.3=r43ha770c72_0
   - r-climate4r.datasets=0.0.1=r43ha770c72_2
   - r-climate4r.indices=0.3.1=r43ha770c72_0
-# These 2 packages contain vulnerabilities
-#  - r-climate4r.udg
-#  - r-climate4r.value
   - r-s2dv=2.0.0=r43hc72bb7e_0
   - jupyter_client=8.6.0=pyhd8ed1ab_0
   - r-dataretrieval=2.7.14=r43h785f33e_0
