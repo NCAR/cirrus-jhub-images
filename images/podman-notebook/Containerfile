@@ -2,9 +2,13 @@
 # Containerfile for base of all CISL Cloud images
 FROM quay.io/podman/stable:latest
 
+USER root
+
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+RUN userdel podman
 
 # Setup environment to match variables set by repo2docker as much as possible
 # The name of the conda environment into which the requested packages are installed
@@ -13,8 +17,8 @@ ENV CONDA_ENV=podman-base \
     DEBIAN_FRONTEND=noninteractive \
     # Set username, uid and gid (same as uid) of non-root user the container will be run as
     NB_USER=jovyan \
-    NB_UID=1001 \
-    NB_GID=1001 \
+    NB_UID=1000 \
+    NB_GID=1000 \
     # Use /bin/bash as shell, not the default /bin/sh (arrow keys, etc don't work then)
     SHELL=/bin/bash \
     # Setup locale to be UTF-8, avoiding gnarly hard to debug encoding errors
