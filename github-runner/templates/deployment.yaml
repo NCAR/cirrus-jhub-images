@@ -7,6 +7,7 @@ metadata:
     app: {{ .Values.webapp.name }}
     group: {{ .Values.webapp.group }}
 spec:
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ .Values.webapp.name }}
@@ -24,8 +25,6 @@ spec:
             cpu: {{ .Values.webapp.container.cpu }}
         ports:
         - containerPort: {{ .Values.webapp.container.port }}
-        securityContext:
-          privileged: true
         env:
         - name: REPO
           value: {{ .Values.webapp.repo }}
