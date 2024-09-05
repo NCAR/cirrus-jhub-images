@@ -1,3 +1,4 @@
+# The base JupyterHub image. Sets up initial software & dependencies
 # Dockerfile to build on top of - Using Ubuntu 22:04
 FROM ubuntu:22.04
 
