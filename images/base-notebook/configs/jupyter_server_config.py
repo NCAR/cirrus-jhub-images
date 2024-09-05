@@ -15,7 +15,7 @@ c.ServerApp.open_browser = False
 c.InlineBackend.figure_formats = {"png", "jpeg", "svg", "pdf"}
 
 # https://github.com/jupyter/notebook/issues/3130
-c.FileContentsManager.delete_to_trash = False
+c.FileContentsManager.delete_to_trash = True
 
 # Generate a self-signed certificate
 OPENSSL_CONFIG = """\
