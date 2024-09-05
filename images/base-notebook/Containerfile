@@ -1,6 +1,9 @@
 # Dockerfile to build on top of - Using Ubuntu 22:04
 FROM hub.k8s.ucar.edu/cislcloudpilot/jhub-base:2024-09-05.20
 
+# jhub-base image uses jovyan as the default user, need to install things with root for now
+USER root
+
 # Setup environment to match variables set by repo2docker as much as possible
 # The name of the conda environment into which the requested packages are installed
 ENV CONDA_ENV=cisl-cloud-base \
