@@ -9,6 +9,10 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Setup environment to match variables set by repo2docker as much as possible
 # The name of the conda environment into which the requested packages are installed
 ENV CONDA_ENV=cisl-gpu-base \
+    CONDA_VER='24.11.3-0' \
+    # Install conda in the same place repo2docker does
+    CONDA_DIR=/srv/conda \
+    CONDA_USR_DIR=/srv/base-conda \
     # Tell apt-get to not block installs by asking for interactive human input
     DEBIAN_FRONTEND=noninteractive \
     # Set username, uid and gid (same as uid) of non-root user the container will be run as
@@ -20,9 +24,6 @@ ENV CONDA_ENV=cisl-gpu-base \
     # Setup locale to be UTF-8, avoiding gnarly hard to debug encoding errors
     LANG=C.UTF-8  \
     LC_ALL=C.UTF-8 \
-    # Install conda in the same place repo2docker does
-    CONDA_DIR=/srv/conda \
-    CONDA_USR_DIR=/srv/base-conda \
     PIP_EXTRA_INDEX_URL='https://pypi.nvidia.com'
 
 # All env vars that reference other env vars need to be in their own ENV block
@@ -83,21 +84,21 @@ ENV TZ UTC
 
 # Install latest mambaforge in ${CONDA_DIR}
 RUN echo "Installing Mambaforge..." \
-    && URL="https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh" \
-    && wget --quiet ${URL} -O installer.sh 
-   # && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
-    #&& rm installer.sh \
-    #&& mamba install conda-lock jupyterhub==4.0.1 notebook conda-forge::nb_conda_kernels -y \
-    #&& mamba clean -afy \
+    && URL="https://github.com/conda-forge/miniforge/releases/download/${CONDA_VER}/Miniforge3-${CONDA_VER}-Linux-x86_64.sh" \
+    && wget --quiet ${URL} -O installer.sh \
+    && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
+    && rm installer.sh \
+    && mamba install conda-lock jupyterhub==4.0.1 notebook conda-forge::nb_conda_kernels -y \
+    && mamba clean -afy \
     # After installing the packages, we cleanup some unnecessary files
     # to try reduce image size - see https://jcristharif.com/conda-docker-tips.html
     # Although we explicitly do *not* delete .pyc files, as that seems to slow down startup
     # quite a bit unfortunately - see https://github.com/2i2c-org/infrastructure/issues/2047
-    #&& find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
+    && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
     # Fix permissions
-    #&& fix-permissions "${CONDA_DIR}" \
-    #&& fix-permissions "${CONDA_USR_DIR}" \
-    #&& fix-permissions "/home/${NB_USER}"
+    && fix-permissions "${CONDA_DIR}" \
+    && fix-permissions "${CONDA_USR_DIR}" \
+    && fix-permissions "/home/${NB_USER}"
 
 # Change to /tmp 
 WORKDIR /tmp
