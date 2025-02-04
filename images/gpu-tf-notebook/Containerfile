@@ -84,20 +84,20 @@ ENV TZ UTC
 # Install latest mambaforge in ${CONDA_DIR}
 RUN echo "Installing Mambaforge..." \
     && URL="https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh" \
-    && wget --quiet ${URL} -O installer.sh \
-    && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
-    && rm installer.sh \
-    && mamba install conda-lock jupyterhub==4.0.1 notebook conda-forge::nb_conda_kernels -y \
-    && mamba clean -afy \
+    && wget --quiet ${URL} -O installer.sh 
+   # && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
+    #&& rm installer.sh \
+    #&& mamba install conda-lock jupyterhub==4.0.1 notebook conda-forge::nb_conda_kernels -y \
+    #&& mamba clean -afy \
     # After installing the packages, we cleanup some unnecessary files
     # to try reduce image size - see https://jcristharif.com/conda-docker-tips.html
     # Although we explicitly do *not* delete .pyc files, as that seems to slow down startup
     # quite a bit unfortunately - see https://github.com/2i2c-org/infrastructure/issues/2047
-    && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
+    #&& find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
     # Fix permissions
-    && fix-permissions "${CONDA_DIR}" \
-    && fix-permissions "${CONDA_USR_DIR}" \
-    && fix-permissions "/home/${NB_USER}"
+    #&& fix-permissions "${CONDA_DIR}" \
+    #&& fix-permissions "${CONDA_USR_DIR}" \
+    #&& fix-permissions "/home/${NB_USER}"
 
 # Change to /tmp 
 WORKDIR /tmp
