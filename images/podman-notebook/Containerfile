@@ -1,5 +1,5 @@
 # The instructions for this image were put together with heavy influence from the Jupyter Docker stack and Pangeo base images. 
-# Containerfile for base of all CISL Cloud images
+# Container image file for JupyterHub Notebook with Podman installed
 FROM quay.io/podman/stable:latest
 
 USER root
