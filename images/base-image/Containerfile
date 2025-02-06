@@ -84,7 +84,7 @@ RUN echo "Installing Mambaforge..." \
     && wget --quiet ${URL} -O installer.sh \
     && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
     && rm installer.sh \
-    && mamba install conda-lock jupyterhub==4.0.1 notebook r-irkernel conda-forge::nb_conda_kernels -y \
+    && mamba install conda-lock jupyterhub==5.2.1 notebook r-irkernel conda-forge::nb_conda_kernels -y \
     && mamba clean -afy \
     # After installing the packages, we cleanup some unnecessary files
     # to try reduce image size - see https://jcristharif.com/conda-docker-tips.html
