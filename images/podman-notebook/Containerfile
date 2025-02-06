@@ -112,7 +112,7 @@ COPY packages/requirements.txt packages/cisl-cloud-base.yml /tmp/
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
 # Create the conda envs with mamba to increase installation speed
-RUN mamba env create --name ${CONDA_ENV} -f cisl-cloud-base.yml --prefix=${CONDA_DIR}/${CONDA_ENV} \
+RUN mamba env create -f cisl-cloud-base.yml --prefix=${CONDA_DIR}/${CONDA_ENV} \
     && mamba clean -afy \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
