@@ -8,7 +8,13 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup environment
 # Tell apt-get to not block installs by asking for interactive human input
-ENV DEBIAN_FRONTEND=noninteractive \
+ENV CONDA_ENV=cisl-cloud-base \
+    CONDA_VER='24.11.3-0' \
+    # Install conda in the same place repo2docker does
+    CONDA_DIR=/srv/conda \
+    CONDA_USR_DIR=/srv/base-conda \
+    # Tell apt-get to not block installs by asking for interactive human input
+    DEBIAN_FRONTEND=noninteractive \
     # Set username, uid and gid (same as uid) of non-root user the container will be run as
     NB_USER=jovyan \
     NB_UID=1000 \
@@ -17,9 +23,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     SHELL=/bin/bash \
     # Setup locale to be UTF-8, avoiding gnarly hard to debug encoding errors
     LANG=C.UTF-8  \
-    LC_ALL=C.UTF-8 \
-    # Install conda in the same place repo2docker does
-    CONDA_DIR=/srv/conda
+    LC_ALL=C.UTF-8 
 
 # All env vars that reference other env vars need to be in their own ENV block
 # Home directory of our non-root user
@@ -76,11 +80,11 @@ ENV TZ UTC
 
 # Install latest mambaforge in ${CONDA_DIR}
 RUN echo "Installing Mambaforge..." \
-    && URL="https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh" \
+    && URL="https://github.com/conda-forge/miniforge/releases/download/${CONDA_VER}/Miniforge3-${CONDA_VER}-Linux-x86_64.sh" \
     && wget --quiet ${URL} -O installer.sh \
     && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
     && rm installer.sh \
-    && mamba install conda-lock jupyterhub==4.0.1 notebook r-irkernel conda-forge::nb_conda_kernels -y \
+    && mamba install conda-lock jupyterhub==5.2.1 notebook r-irkernel conda-forge::nb_conda_kernels -y \
     && mamba clean -afy \
     # After installing the packages, we cleanup some unnecessary files
     # to try reduce image size - see https://jcristharif.com/conda-docker-tips.html
@@ -102,9 +106,6 @@ RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
 
 # Copy the initial condarc file over to define conda congiruation
 COPY --chown="${NB_UID}:${NB_GID}" configs/.condarc "${CONDA_DIR}/.condarc"
-
-# Update conda
-RUN conda update -n base -c conda-forge conda
 
 # Copy the jupyter configuration
 COPY configs/jupyter_server_config.py /etc/jupyter/jupyter_server_config.py
