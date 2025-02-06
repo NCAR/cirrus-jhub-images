@@ -111,9 +111,6 @@ COPY packages/requirements.txt packages/cisl-cloud-base.yml /tmp/
 # and places base envs in /srv/conda
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
-# Update conda to latest version
-RUN conda update -n base -c conda-forge conda
-
 # Create the conda envs with mamba to increase installation speed
 RUN mamba env create -f cisl-cloud-base.yml \
     && mamba clean -afy \
