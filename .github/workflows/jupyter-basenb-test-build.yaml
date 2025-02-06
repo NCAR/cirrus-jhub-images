@@ -18,7 +18,7 @@ env:
 # Define the actions that are going to take place as part of this workflow    
 jobs:
   # Name the job(s)
-  podman-build-base-notebook:
+  test-build-base-nb:
     # Define where the job should run in this case it will be run on the latest ubuntu image
     runs-on: gh-arc-ccpp-images
     # Set the steps to take in order
