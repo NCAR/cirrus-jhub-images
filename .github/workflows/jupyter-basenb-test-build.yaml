@@ -24,6 +24,7 @@ jobs:
     # Set the steps to take in order
     steps:
       # Step 1 is to checkout the github repo used to build the Container Image
+      - run: apt install gh
       - name: Check out the repo
         uses: actions/checkout@v4
       # Get the date to apply to image tag
