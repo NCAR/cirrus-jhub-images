@@ -18,6 +18,4 @@ jobs:
     runs-on: gh-arc-ccpp-images
     # Set the steps to take in order
     steps:
-      # Step 1 is to checkout the github repo used to build the Container Image
-      - run: uname -a
-      - run: apt-get install -y gh
+      - run: sudo apt-get install -y gh
