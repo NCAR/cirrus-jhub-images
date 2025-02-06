@@ -1,5 +1,6 @@
 # The instructions for this image were put together with heavy influence from the Jupyter Docker stack and Pangeo base images. 
 # Container image file for a Remote Desktop JupyterHub Notebook image
+
 FROM ubuntu:22.04
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
