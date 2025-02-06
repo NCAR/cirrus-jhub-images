@@ -30,7 +30,7 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
-      - name: Build and push Nick Knows Flask image"
+      - name: Build pytorch notebook image
         run: |
           docker buildx create --use --driver=remote tcp://buildkit-buildkit-service.arc-systems:1234
           docker buildx build -f images/gpu-pyt-notebook/Containerfile -t hub.k8s.ucar.edu/cislcloudpilot/cisl-cloud-gpu-pyt:${{ steps.date.outputs.date }} images/gpu-pyt-notebook/.
