@@ -1,5 +1,4 @@
 # Container image file for TensorFlow JupyterHub Notebook Image
-
 FROM ubuntu:22.04
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
