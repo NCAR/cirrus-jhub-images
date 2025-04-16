@@ -1,5 +1,5 @@
-# ccpp-jhub-images
-This repository is where Custom Jupyter images for use with the CISL Cloud Pilot Project are maintained and built via GitHub Actions on self-hosted runners
+# cirrus-jhub-images
+This repository is where Custom Jupyter images for use with the CISL CIRRUS JupyterHub are maintained and built via GitHub Actions on GitHub Actions Runner scale sets
 
 | Image Name | Test Status | Image Push Status |
 |---|---|---|
