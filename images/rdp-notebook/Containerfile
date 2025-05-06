@@ -1,5 +1,6 @@
 # The instructions for this image were put together with heavy influence from the Jupyter Docker stack and Pangeo base images. 
 # Container image file for a Remote Desktop JupyterHub Notebook image
+# Dockerfile to build on top of - Using Ubuntu 24.04
 
 FROM ubuntu:24.04
 

@@ -1,4 +1,5 @@
 # Container image file for TensorFlow JupyterHub Notebook Image
+# Dockerfile to build on top of - Using Ubuntu 24.04
 
 FROM ubuntu:24.04
 
