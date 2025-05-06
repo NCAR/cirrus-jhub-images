@@ -10,8 +10,7 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN userdel podman
 
-# Setup environment to match variables set by repo2docker as much as possible
-# The name of the conda environment into which the requested packages are installed
+# Setup environment
 ENV CONDA_ENV=podman-base \
     CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does

@@ -7,7 +7,6 @@ FROM ubuntu:22.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup environment
-# Tell apt-get to not block installs by asking for interactive human input
 ENV CONDA_ENV=cirrus-base \
     CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does
