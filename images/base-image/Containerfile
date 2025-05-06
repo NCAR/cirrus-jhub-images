@@ -64,7 +64,7 @@ RUN echo "Creating ${NB_USER} user..." \
     # Create a group for the user to be part of, with gid same as uid
     && groupadd -f --gid ${NB_UID} ${NB_USER}  \
     # Create non-root user, with given gid, uid and create $HOME
-    && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} \
+    && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} -o \
     # Make sure that /srv is owned by non-root user, so we can install things there
     && chown -R ${NB_USER}:${NB_USER} /srv
 
