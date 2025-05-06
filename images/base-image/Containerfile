@@ -74,7 +74,7 @@ RUN mkdir -p "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
 # Add TZ configuration - https://github.com/PrefectHQ/prefect/issues/3061
-ENV TZ UTC
+ENV TZ=UTC
 # ========================
 
 # Install latest mambaforge in ${CONDA_DIR}
