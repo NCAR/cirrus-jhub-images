@@ -9,8 +9,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup environment to match variables set by repo2docker as much as possible
 # The name of the conda environment into which the requested packages are installed
-ENV CONDA_ENV=cisl-cloud-base \
-    CONDA_VER='24.11.3-0' \
+ENV CONDA_ENV=cirrus-base \
+    CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
     CONDA_USR_DIR=/srv/base-conda \
@@ -105,7 +105,7 @@ RUN echo "Installing Mambaforge..." \
 WORKDIR /tmp
 
 # Copy pip and conda packages in to tmp
-COPY packages/requirements.txt packages/cisl-cloud-base.yml /tmp/
+COPY packages/requirements.txt packages/cirrus-base.yml /tmp/
 
 # Install pip packages
 RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
@@ -115,7 +115,7 @@ RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
 # Create the conda envs with mamba to increase installation speed
-RUN mamba env create --name ${CONDA_ENV} -f cisl-cloud-base.yml \
+RUN mamba env create --name ${CONDA_ENV} -f cirrus-base.yml \
     && mamba clean -afy \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
@@ -146,7 +146,7 @@ RUN chmod 755 ${CONDA_USR_DIR}/${CONDA_ENV}/* && \
     chown root:root /srv/*   
 
 # Cleanup files that were already installed
-RUN rm -rf /tmp/cisl-cloud-base.yml && \
+RUN rm -rf /tmp/cirrus-base.yml && \
     rm -rf /tmp/requirements.txt
 
 # Set the default user to jovyan and make home /hom/jovyan

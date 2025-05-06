@@ -8,8 +8,8 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup environment to match variables set by repo2docker as much as possible
 # The name of the conda environment into which the requested packages are installed
-ENV CONDA_ENV=cisl-cloud-base \
-    CONDA_VER='24.11.3-0' \
+ENV CONDA_ENV=cirrus-base \
+    CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
     CONDA_USR_DIR=/srv/base-conda \
@@ -104,7 +104,7 @@ RUN echo "Installing Mambaforge..." \
 WORKDIR /tmp
 
 # Copy pip and conda packages in to tmp
-COPY packages/requirements.txt packages/cisl-cloud-base.yml packages/npl-2023b.yml packages/npl-2024a.yml packages/r-4.3.yml /tmp/
+COPY packages/requirements.txt packages/cirrus-base.yml packages/npl-2025a.yml packages/r.yml /tmp/
 
 # Install pip packages
 RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
@@ -113,10 +113,9 @@ RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
 # Create the conda envs with mamba to increase installation speed
-RUN mamba env create --name ${CONDA_ENV} -f cisl-cloud-base.yml \
-    && mamba env create -f npl-2023b.yml \
-    && mamba env create -f npl-2024a.yml \
-    && mamba env create -f r-4.3.yml \
+RUN mamba env create --name ${CONDA_ENV} -f cirrus-base.yml \
+    && mamba env create -f npl-2025a.yml \
+    && mamba env create -f r.yml \
     && mamba clean -afy \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
@@ -188,17 +187,15 @@ COPY --chown="${NB_UID}:${NB_GID}" configs/.condarc "${CONDA_DIR}/.condarc"
 # Make the conda environments we install read only and executable for the user
 # They can run the environments but will get permission denied when trying to make changes
 # New environments are installed to /home/jovyan/.jupyter with write permissions for the users
-RUN chmod 755 /srv/base-conda/cisl-cloud-base/* && \
-    chmod 755 /srv/base-conda/npl-2023b/* && \
-    chmod 755 /srv/base-conda/npl-2024a/* && \
-    chmod 755 /srv/base-conda/r-4.3/* && \
+RUN chmod 755 /srv/base-conda/cirrus-base/* && \
+    chmod 755 /srv/base-conda/npl-2025a/* && \
+    chmod 755 /srv/base-conda/r/* && \
     chown root:root /srv/*   
 
 # Cleanup files that were already installed
-RUN rm -rf /tmp/cisl-cloud-base.yml && \
-    rm -rf /tmp/npl-2023b.yml && \
-    rm -rf /tmp/npl-2024a.yml && \
-    rm -rf /tmp/r-4.3.yml && \
+RUN rm -rf /tmp/cirrus-base.yml && \
+    rm -rf /tmp/npl-2025a.yml && \
+    rm -rf /tmp/r.yml && \
     rm -rf /tmp/requirements.txt
 
 # Set the default user to jovyan and make home /hom/jovyan

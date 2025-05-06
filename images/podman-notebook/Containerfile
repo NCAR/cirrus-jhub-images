@@ -13,7 +13,7 @@ RUN userdel podman
 # Setup environment to match variables set by repo2docker as much as possible
 # The name of the conda environment into which the requested packages are installed
 ENV CONDA_ENV=podman-base \
-    CONDA_VER='24.11.3-0' \
+    CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
     CONDA_USR_DIR=/srv/base-conda \
@@ -107,14 +107,14 @@ RUN echo "Installing Mambaforge..." \
 WORKDIR /tmp
 
 # Copy pip and conda packages in to tmp
-COPY packages/requirements.txt packages/cisl-cloud-base.yml /tmp/
+COPY packages/requirements.txt packages/podman-base.yml /tmp/
 
 # Copy the initial condarc file over to define conda configuration
 # and places base envs in /srv/conda
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
 # Create the conda envs with mamba to increase installation speed
-RUN mamba env create --name ${CONDA_ENV} -f cisl-cloud-base.yml \
+RUN mamba env create --name ${CONDA_ENV} -f podman-base.yml \
     && mamba clean -afy \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
@@ -148,7 +148,7 @@ RUN chmod 755 ${CONDA_USR_DIR}/${CONDA_ENV}/* && \
     chown root:root /srv/*   
 
 # Cleanup files that were already installed
-RUN rm -rf /tmp/cisl-cloud-base.yml && \
+RUN rm -rf /tmp/podman-base.yml && \
     rm -rf /tmp/requirements.txt && \
     fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
