@@ -113,7 +113,7 @@ RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 
 # Create the conda envs with mamba to increase installation speed
-RUN CONDA_OVERRIDE_CUDA="12.3" mamba env create --name ${CONDA_ENV} -f cirrus-tensorflow-base.yml \
+RUN mamba env create --name ${CONDA_ENV} -f cirrus-tensorflow-base.yml \
     && mamba clean -afy \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
