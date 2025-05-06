@@ -1,7 +1,7 @@
 # This workflow builds docker images and pushes them to a Docker Hub Repository
 # This workflow is specific to the base-image directory and image
 # Set the workflow name
-name: JHub Base Build Test
+name: JHub Base Image Build Test
 
 # Define the trigger that starts the action
 # For this workflow the trigger is on a push that changes anything in the images/base-image/ path
