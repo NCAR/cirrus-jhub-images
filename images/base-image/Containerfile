@@ -1,6 +1,6 @@
 # The base JupyterHub image. Sets up initial software & dependencies
-# Dockerfile to build on top of - Using Ubuntu 24.04
-FROM ubuntu:24.04
+# Dockerfile to build on top of - Using Ubuntu 22.04
+FROM ubuntu:22.04
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014

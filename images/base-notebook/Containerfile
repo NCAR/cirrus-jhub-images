@@ -1,5 +1,5 @@
 # Container image file for base JupyterHub Notebook Image 
-# Dockerfile to build on top of - Using Ubuntu 24.04
+# Dockerfile to build on top of - Using Ubuntu 22.04
 
 FROM ubuntu:24.04
 
