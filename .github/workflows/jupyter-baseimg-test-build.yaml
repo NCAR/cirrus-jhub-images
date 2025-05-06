@@ -33,7 +33,7 @@ jobs:
       - name: Build base image
         run: |
           docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc.ml-cluster.local:1234
-          docker buildx build -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/jhub-base:${{ steps.date.outputs.date }} images/base-image/.
+          docker buildx build -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-base:${{ steps.date.outputs.date }} images/base-image/.
       - name: Create pull request to merge dev in to main
         run: gh pr view ${{ env.BRANCH_NAME }} && gh pr reopen ${{ env.BRANCH_NAME }} || gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Test build successful. Merge JHub Base image update from dev into main' --body 'Created by Github action'
         env:

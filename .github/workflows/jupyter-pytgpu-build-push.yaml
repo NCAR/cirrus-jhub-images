@@ -17,7 +17,7 @@ jobs:
   # Name the job(s)
   build-push-pytorch-nb:
     # Define where the job should run in this case it will be run on the latest ubuntu image
-    runs-on: self-hosted
+    runs-on: gha-runner-cirrus-jhub-images
     # Set the steps to take in order
     steps:
       # Step 1 is to checkout the github repo used to build the Containerfile
@@ -27,11 +27,12 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
-      - name: Build Podman image
+      - name: Build image
         run: |
-          podman build -f images/gpu-pyt-notebook/Containerfile -t hub.k8s.ucar.edu/cislcloudpilot/cisl-cloud-gpu-pyt:${{ steps.date.outputs.date }} images/gpu-pyt-notebook/. --no-cache --format=docker
+          docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc.ml-cluster.local:1234
+          docker buildx build -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-pytorch:${{ steps.date.outputs.date }} images/base-image/.
       - name: Login to Harbor
-        run: podman login hub.k8s.ucar.edu -u robot-cislcloudpilot+cislcloudpilot -p ${{ secrets.HARBOR_LOGIN  }}
-      - name: Push Podman image to Harbor
+        run: docker login hub.k8s.ucar.edu -u ${{ secrets.HARBOR_LOGIN }} -p ${{ secrets.HARBOR_SECRET }}
+      - name: Push image to Harbor
         run: |
-          podman push hub.k8s.ucar.edu/cislcloudpilot/cisl-cloud-gpu-pyt:${{ steps.date.outputs.date }}
+          docker push hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-pytorch:${{ steps.date.outputs.date }}

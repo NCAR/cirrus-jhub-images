@@ -34,7 +34,7 @@ jobs:
       - name: Build remote desktop notebook image
         run: |
           docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc.ml-cluster.local:1234
-          docker buildx build -f images/rdp-notebook/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cisl-cloud-rdp:${{ steps.date.outputs.date }} images/rdp-notebook/.
+          docker buildx build -f images/rdp-notebook/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-rdp:${{ steps.date.outputs.date }} images/rdp-notebook/.
       - name: Create pull request to merge dev in to main
         run: gh pr view ${{ env.BRANCH_NAME }} && gh pr reopen ${{ env.BRANCH_NAME }} || gh pr create -B main -H ${{ env.BRANCH_NAME }}  --title 'Test build successful. Merge RDP notebook update from dev into main' --body 'Created by Github action'
         env:
