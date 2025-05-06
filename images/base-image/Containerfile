@@ -1,5 +1,5 @@
 # The base JupyterHub image. Sets up initial software & dependencies
-# Dockerfile to build on top of - Using Ubuntu 22:04
+# Dockerfile to build on top of - Using Ubuntu 22.04
 FROM ubuntu:22.04
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
@@ -7,9 +7,8 @@ FROM ubuntu:22.04
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Setup environment
-# Tell apt-get to not block installs by asking for interactive human input
-ENV CONDA_ENV=cisl-cloud-base \
-    CONDA_VER='24.11.3-0' \
+ENV CONDA_ENV=cirrus-base \
+    CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
     CONDA_USR_DIR=/srv/base-conda \
@@ -75,7 +74,7 @@ RUN mkdir -p "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
 # Add TZ configuration - https://github.com/PrefectHQ/prefect/issues/3061
-ENV TZ UTC
+ENV TZ=UTC
 # ========================
 
 # Install latest mambaforge in ${CONDA_DIR}

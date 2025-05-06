@@ -1,7 +1,7 @@
 # This workflow builds docker images and pushes them to a Docker Hub Repository
 # This workflow is specific to the base-image directory and image
 # Set the workflow name
-name: JHub Base Build Test
+name: JHub Base Image Build Test
 
 # Define the trigger that starts the action
 # For this workflow the trigger is on a push that changes anything in the images/base-image/ path
@@ -20,7 +20,7 @@ jobs:
   # Name the job(s)
   test-build-base-image:
     # Define where the job should run in this case it will be run on the latest ubuntu image
-    runs-on: gh-arc-ccpp-images
+    runs-on: gha-runner-cirrus-jhub-images
     # Set the steps to take in order
     steps:
       - name: Install gh-cli
@@ -42,8 +42,8 @@ jobs:
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
       - name: Build base image
         run: |
-          docker buildx create --use --driver=remote tcp://buildkit-buildkit-service.arc-systems:1234
-          docker buildx build -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cislcloudpilot/jhub-base:${{ steps.date.outputs.date }} images/base-image/.
+          docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc:1234
+          docker buildx build --output=type=image,push=false -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-base:${{ steps.date.outputs.date }} images/base-image/.
       - name: Create pull request to merge dev in to main
         run: gh pr view ${{ env.BRANCH_NAME }} && gh pr reopen ${{ env.BRANCH_NAME }} || gh pr create -B main -H ${{ env.BRANCH_NAME }} --title 'Test build successful. Merge JHub Base image update from dev into main' --body 'Created by Github action'
         env:

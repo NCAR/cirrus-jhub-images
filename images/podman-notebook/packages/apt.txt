@@ -4,6 +4,7 @@ cmake
 csh
 emacs
 g++
+gawk
 gcc
 gfortran
 git

@@ -20,7 +20,7 @@ jobs:
   # Name the job(s)
   test-build-rdp-nb:
     # Define where the job should run in this case it will be run on the latest ubuntu image
-    runs-on: gh-arc-ccpp-images
+    runs-on: gha-runner-cirrus-jhub-images
     # Set the steps to take in order
     steps:
       - name: Install gh-cli
@@ -42,8 +42,8 @@ jobs:
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
       - name: Build remote desktop notebook image
         run: |
-          docker buildx create --use --driver=remote tcp://buildkit-buildkit-service.arc-systems:1234
-          docker buildx build -f images/rdp-notebook/Containerfile -t hub.k8s.ucar.edu/cislcloudpilot/cisl-cloud-rdp:${{ steps.date.outputs.date }} images/rdp-notebook/.
+          docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc:1234
+          docker buildx build --output=type=image,push=false -f images/rdp-notebook/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-rdp:${{ steps.date.outputs.date }} images/rdp-notebook/.
       - name: Create pull request to merge dev in to main
         run: gh pr view ${{ env.BRANCH_NAME }} && gh pr reopen ${{ env.BRANCH_NAME }} || gh pr create -B main -H ${{ env.BRANCH_NAME }}  --title 'Test build successful. Merge RDP notebook update from dev into main' --body 'Created by Github action'
         env:

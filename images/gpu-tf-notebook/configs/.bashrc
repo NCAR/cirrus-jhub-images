@@ -132,4 +132,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-conda activate cisl-gpu-base
+conda activate cirrus-tensorflow-base
