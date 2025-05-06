@@ -31,7 +31,7 @@ jobs:
         run: docker login hub.k8s.ucar.edu -u ${{ secrets.HARBOR_LOGIN }} -p ${{ secrets.HARBOR_SECRET }}
       - name: Build image
         run: |
-          docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc.ml-cluster.local:1234
+          docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc:1234
           docker buildx build --push -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-nb:${{ steps.date.outputs.date }} images/base-image/.
       - name: Push image to Harbor
         run: |
