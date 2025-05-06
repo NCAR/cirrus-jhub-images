@@ -9,7 +9,7 @@ jupyterlab_nvdashboard
 jupyter-resource-usage==1.1.1
 jupyter-server-proxy==4.4.0
 jupyter_bokeh==4.0.5
-jupyterlab-git==0.50.2
+jupyterlab-git==0.51.1
 jupyterlab-s3-browser==0.12.0
 nbdime==4.0.2
 nbgitpuller==1.2.2
