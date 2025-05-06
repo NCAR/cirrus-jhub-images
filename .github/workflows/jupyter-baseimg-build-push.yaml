@@ -27,12 +27,12 @@ jobs:
       - name: Get current date
         id: date
         run: echo "date=$(date +'%Y-%m-%d.%H')" >> $GITHUB_OUTPUT
+      - name: Login to Harbor
+        run: docker login hub.k8s.ucar.edu -u ${{ secrets.HARBOR_LOGIN }} -p ${{ secrets.HARBOR_SECRET }}
       - name: Build image
         run: |
           docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc.ml-cluster.local:1234
-          docker buildx build -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-base:${{ steps.date.outputs.date }} images/base-image/.
-      - name: Login to Harbor
-        run: docker login hub.k8s.ucar.edu -u ${{ secrets.HARBOR_LOGIN }} -p ${{ secrets.HARBOR_SECRET }}
+          docker buildx build --push -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-base:${{ steps.date.outputs.date }} images/base-image/.
       - name: Push image to Harbor
         run: |
           docker push hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-base:${{ steps.date.outputs.date }}
