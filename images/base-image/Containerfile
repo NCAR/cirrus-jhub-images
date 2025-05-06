@@ -1,6 +1,6 @@
 # The base JupyterHub image. Sets up initial software & dependencies
 # Dockerfile to build on top of - Using Ubuntu 22.04
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
@@ -62,7 +62,7 @@ RUN chmod a+rx /usr/local/bin/fix-permissions
 # and make sure these dirs are writable by the `users` group.
 RUN echo "Creating ${NB_USER} user..." \
     # Create a group for the user to be part of, with gid same as uid
-    && groupadd --gid ${NB_UID} ${NB_USER}  \
+    && groupadd -f --gid ${NB_UID} ${NB_USER}  \
     # Create non-root user, with given gid, uid and create $HOME
     && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} \
     # Make sure that /srv is owned by non-root user, so we can install things there
