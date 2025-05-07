@@ -3,6 +3,7 @@ This repository is where Custom Jupyter images for use with the CISL CIRRUS Jupy
 
 | Image Name | Test Status | Image Push Status |
 |---|---|---|
+| **Jupyter Base image build** | ![Base Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-baseimg-test-build.yaml/badge.svg) | ![Base Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-baseimg-build-push.yaml/badge.svg) |
 | **Jupyter Singleuser CPU image build** | ![CPU Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-basenb-test-build.yaml/badge.svg) | ![CPU Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-basenb-build-push.yaml/badge.svg) |
 | **Jupyter RDP CPU image build** | ![RDP Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-rdpnb-test-build.yaml/badge.svg) | ![RDP Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-basenb-build-push.yaml/badge.svg) |
 | **Jupyter Podman image build** | ![Podman Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-podman-test-build.yaml/badge.svg) | ![Podman Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-podman-build-push.yaml/badge.svg) |

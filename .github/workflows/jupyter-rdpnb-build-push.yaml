@@ -12,6 +12,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 # Define the actions that are going to take place as part of this workflow    
 jobs:
   # Name the job(s)
