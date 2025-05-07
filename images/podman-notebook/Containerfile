@@ -15,7 +15,6 @@ ENV CONDA_ENV=podman-base \
     CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
-    CONDA_USR_DIR=/srv/base-conda \
     # Tell apt-get to not block installs by asking for interactive human input
     DEBIAN_FRONTEND=noninteractive \
     # Set username, uid and gid (same as uid) of non-root user the container will be run as
@@ -75,9 +74,7 @@ RUN echo "Creating ${NB_USER} user..." \
 
 # Create the directories where conda environments are going to be installed
 RUN mkdir -p "${CONDA_DIR}" && \
-    mkdir -p "${CONDA_USR_DIR}" && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "${CONDA_USR_DIR}" && \
     fix-permissions "/home/${NB_USER}"
 
 # Add TZ configuration - https://github.com/PrefectHQ/prefect/issues/3061
@@ -99,7 +96,6 @@ RUN echo "Installing Mambaforge..." \
     && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
-    && fix-permissions "${CONDA_USR_DIR}" \
     && fix-permissions "/home/${NB_USER}"
 
 # Change to /tmp to work out
@@ -117,7 +113,6 @@ RUN mamba env create --name ${CONDA_ENV} -f podman-base.yml \
     && mamba clean -afy \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
-    && fix-permissions "${CONDA_USR_DIR}" \
     && fix-permissions "/home/${NB_USER}"
 
 # Run conda activate each time a bash shell starts, so users don't have to manually type conda activate
@@ -143,7 +138,7 @@ COPY --chown="${NB_UID}:${NB_GID}" configs/.condarc "${CONDA_DIR}/.condarc"
 # Make the conda environments we install read only and executable for the user
 # They can run the environments but will get permission denied when trying to make changes
 # New environments are installed to /home/jovyan/.jupyter with write permissions for the users
-RUN chmod 755 ${CONDA_USR_DIR}/${CONDA_ENV}/* && \
+RUN chmod 755 ${CONDA_DIR}/envs/${CONDA_ENV}/* && \
     chown root:root /srv/*   
 
 # Cleanup files that were already installed
