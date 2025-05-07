@@ -6,7 +6,6 @@ channels:
   - nvidia
 dependencies:
   # GPU/TensorFlow Specific Packages
-  - flax
   - jax
   - keras-cv
   - catboost
