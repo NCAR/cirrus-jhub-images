@@ -12,6 +12,9 @@ on:
     branches:
       - dev
 
+permissions:
+  contents: read
+
 env:
   BRANCH_NAME: ${{ github.ref_name }}
 
