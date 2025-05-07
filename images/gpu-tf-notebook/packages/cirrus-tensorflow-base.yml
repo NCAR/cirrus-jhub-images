@@ -92,7 +92,6 @@ dependencies:
   - papermill=2.6.0
   - pillow=11.1.0
   - pop-tools=2023.6.0
-  - pyarrow=20.0.0
   - pydap=3.5.5
   - pygraphviz=1.14
   - pygrib=2.1.6
