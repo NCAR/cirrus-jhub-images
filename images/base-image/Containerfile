@@ -11,7 +11,6 @@ ENV CONDA_ENV=cirrus-base \
     CONDA_VER='25.3.0-1' \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
-    CONDA_USR_DIR=/srv/base-conda \
     # Tell apt-get to not block installs by asking for interactive human input
     DEBIAN_FRONTEND=noninteractive \
     # Set username, uid and gid (same as uid) of non-root user the container will be run as
