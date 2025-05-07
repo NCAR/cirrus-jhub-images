@@ -2,7 +2,7 @@
 # Container image file for a Remote Desktop JupyterHub Notebook image
 # Dockerfile to build on top of - Using Ubuntu 22.04
 
-FROM ubuntu:22.04
+FROM ubuntu:24.04
 
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
@@ -16,6 +16,7 @@ ENV CONDA_ENV=cirrus-base \
     CONDA_USR_DIR=/srv/base-conda \
     # Tell apt-get to not block installs by asking for interactive human input
     DEBIAN_FRONTEND=noninteractive \
+    JUPYTERHUB_VER='5.3.0' \
     # Set username, uid and gid (same as uid) of non-root user the container will be run as
     NB_USER=jovyan \
     NB_UID=1000 \
@@ -66,9 +67,9 @@ RUN chmod a+rx /usr/local/bin/fix-permissions
 # and make sure these dirs are writable by the `users` group.
 RUN echo "Creating ${NB_USER} user..." \
     # Create a group for the user to be part of, with gid same as uid
-    && groupadd --gid ${NB_UID} ${NB_USER}  \
+    && groupadd -f --gid ${NB_UID} ${NB_USER}  \
     # Create non-root user, with given gid, uid and create $HOME
-    && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} \
+    && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} -o \
     # Make sure that /srv is owned by non-root user, so we can install things there
     && chown -R ${NB_USER}:${NB_USER} /srv
 
@@ -89,7 +90,7 @@ RUN echo "Installing Mambaforge..." \
     && wget --quiet ${URL} -O installer.sh \
     && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
     && rm installer.sh \
-    && mamba install conda-lock jupyterhub==5.2.1 notebook conda-forge::nb_conda_kernels -y \
+    && mamba install conda-lock jupyterhub==${JUPYTERHUB_VER} notebook conda-forge::nb_conda_kernels -y \
     && mamba clean -afy \
     # After installing the packages, we cleanup some unnecessary files
     # to try reduce image size - see https://jcristharif.com/conda-docker-tips.html
