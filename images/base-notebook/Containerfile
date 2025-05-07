@@ -190,7 +190,7 @@ COPY --chown="${NB_UID}:${NB_GID}" configs/.condarc "${CONDA_DIR}/.condarc"
 # New environments are installed to /home/jovyan/.jupyter with write permissions for the users
 RUN chmod 755 /srv/base-conda/cirrus-base/* && \
     chmod 755 /srv/base-conda/npl-2025a/* && \
-    chmod 755 /srv/base-conda/r/* && \
+    chmod 755 /srv/base-conda/r-4.4/* && \
     chown root:root /srv/*   
 
 # Cleanup files that were already installed
