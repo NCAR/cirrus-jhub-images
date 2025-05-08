@@ -1,3 +1,4 @@
+build-essential
 bzip2
 ca-certificates
 curl
@@ -10,12 +11,15 @@ g++
 gcc
 gfortran
 git
+gnupg2
 graphviz
 libperl-dev
 libsnappy-dev
 libstdc++-12-dev
 locales
 make
+nvidia-cuda-toolkit
+nvidia-cuda-dev
 openssh-client
 pandoc
 run-one

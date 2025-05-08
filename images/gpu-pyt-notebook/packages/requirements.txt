@@ -14,4 +14,9 @@ nbdime==4.0.2
 nbgitpuller==1.2.2
 voila==0.5.8
 jupyterlab_nvdashboard==0.13.0
-torch==2.7.0
+nvidia-cudnn-cu12
+nvidia-cublas-cu12
+nvidia-cuda-runtime-cu12
+nvidia-cuda-cupti-cu12
+nvidia-nvtx-cu12
+nvidia-nccl-cu12
