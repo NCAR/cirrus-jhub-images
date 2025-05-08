@@ -124,7 +124,8 @@ WORKDIR /tmp
 COPY packages/requirements.txt packages/cirrus-pytorch-base.yml /tmp/
 
 # Install pip packages
-RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt
+RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt \
+    ${CONDA_DIR}/bin/pip install torch==2.7.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # Copy the condarc file over to define conda configuration
 COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
@@ -142,8 +143,13 @@ RUN mamba env create -n ${CONDA_ENV} -f cirrus-pytorch-base.yml \
 # on us starting the correct `python` process, which we do by adding the notebook conda environment's
 # bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
 # GPU TensorFlow config based on https://github.com/tensorflow/tensorflow/issues/58681
-RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh&& \
-    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${CONDA_DIR}/lib/' > ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
+RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh && \
+    # Setup LD_LIBRARY_PATH to include CUDA libraries
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${CONDA_DIR}/lib/:/usr/local/cuda/lib64' > ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
+    # Add CUDA environment variables
+    echo 'export CUDA_HOME=/usr/local/cuda' >> ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
+    echo 'export PATH=$PATH:/usr/local/cuda/bin' >> ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
+    # Add XLA flags for TensorFlow
     printf 'export XLA_FLAGS=--xla_gpu_cuda_data_dir=${CONDA_DIR}/lib/\n' >> ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh
 
 # Copy the jupyter configuration
