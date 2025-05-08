@@ -124,7 +124,7 @@ WORKDIR /tmp
 COPY packages/requirements.txt packages/cirrus-pytorch-base.yml /tmp/
 
 # Install pip packages
-RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt \
+RUN ${CONDA_DIR}/bin/pip install --no-cache -r requirements.txt && \
     ${CONDA_DIR}/bin/pip install torch==2.7.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # Copy the condarc file over to define conda configuration
