@@ -59,11 +59,13 @@ RUN chmod a+rx /usr/local/bin/fix-permissions
 
 # Create NB_USER with name jovyan user with UID=1000 and in the 'users' group
 # and make sure these dirs are writable by the `users` group.
-RUN echo "Creating ${NB_USER} user..." \
+RUN echo "Setting up ${NB_USER} user..." \
+    # Remove the default ubuntu user if it exists
+    && (userdel -r ubuntu 2>/dev/null || true) \
     # Create a group for the user to be part of, with gid same as uid
-    && groupadd -f --gid ${NB_UID} ${NB_USER}  \
+    && groupadd --gid ${NB_UID} ${NB_USER} \
     # Create non-root user, with given gid, uid and create $HOME
-    && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} -o \
+    && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} \
     # Make sure that /srv is owned by non-root user, so we can install things there
     && chown -R ${NB_USER}:${NB_USER} /srv
 
