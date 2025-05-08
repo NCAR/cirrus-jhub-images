@@ -152,7 +152,7 @@ RUN chmod 755 ${CONDA_USRDIR}/${CONDA_ENV}/* && \
 RUN rm -rf /tmp/podman-base.yml && \
     rm -rf /tmp/requirements.txt && \
     fix-permissions "${CONDA_DIR}" && \
-    fix-permissions "${CONDA_USERDIR}" && \
+    fix-permissions "${CONDA_USRDIR}" && \
     fix-permissions "/home/${NB_USER}"
 
 # Set the default user to jovyan and make home /home/jovyan
