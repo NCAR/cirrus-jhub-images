@@ -63,11 +63,11 @@ c.CondaKernelSpecManager.name_format = '{environment} ({0})'
 
 # Sets the default kernel to the conda env we install and control
 # You have to use the full name, find by running `python -m nb_conda_kernels list` 
-c.MultiKernelManager.default_kernel_name = 'conda-env-cisl-gpu-base-py' 
+c.MultiKernelManager.default_kernel_name = 'conda-env-cirrus-tensorflow-base-py' 
 
 # Configure nb_conda_kernels to avoid registering jupyter kernels in our conda
 # environment again.
-#c.CondaKernelSpecManager.env_filter = f'.*/srv/conda/*'
+c.CondaKernelSpecManager.env_filter = f'.*/srv/conda/*'
 
 ## Allow access to hidden files
 c.ContentsManager.allow_hidden = True
