@@ -35,4 +35,4 @@ jobs:
       - name: Build image
         run: |
           docker buildx create --use --driver=remote tcp://buildkitd.arc-systems.svc:1234
-          docker buildx build --push -f images/base-image/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-rdp:${{ steps.date.outputs.date }} images/base-image/.
+          docker buildx build --push -f images/rdp-notebook/Containerfile -t hub.k8s.ucar.edu/cirrus-jhub/cirrus-jhub-rdp:${{ steps.date.outputs.date }} images/base-image/.
