@@ -16,7 +16,7 @@ ARG CONDA_VER="25.3.0-1"
 ARG JUPYTERHUB_VER="5.3.0"
 
 # Setup environment
-ENV CONDA_ENV=cirrus-base \
+ENV CONDA_ENV=cirrus-pytorch-base \
     CONDA_VER=${CONDA_VER} \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
