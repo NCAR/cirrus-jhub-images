@@ -3,19 +3,27 @@
 
 FROM ubuntu:24.04
 
+LABEL org.opencontainers.image.title="NSF NCAR CIRRUS JupyterHub PyTorch Notebook Image"
+LABEL org.opencontainers.image.description="JupyterHub notebook server for PyTorch"
+LABEL org.opencontainers.image.source="https://github.com/NCAR.cirrus-jhub-images"
+LABEL org.opencontainers.image.licenses="MIT"
+
 # Fix: https://github.com/hadolint/hadolint/wiki/DL4006
 # Fix: https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
+ARG CONDA_VER="25.3.0-1"
+ARG JUPYTERHUB_VER="5.3.0"
+
 # Setup environment
-ENV CONDA_ENV=cirrus-pytorch-base \
-    CONDA_VER='25.3.0-1' \
+ENV CONDA_ENV=cirrus-base \
+    CONDA_VER=${CONDA_VER} \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
     CONDA_USRDIR=/srv/base-conda \
     # Tell apt-get to not block installs by asking for interactive human input
     DEBIAN_FRONTEND=noninteractive \
-    JUPYTERHUB_VER='5.3.0' \
+    JUPYTERHUB_VER=${JUPYTERHUB_VER} \
     # Set username, uid and gid (same as uid) of non-root user the container will be run as
     NB_USER=jovyan \
     NB_UID=1000 \
