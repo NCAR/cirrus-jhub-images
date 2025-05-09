@@ -5,11 +5,11 @@ channels:
   - conda-forge
   - rapidsai
 dependencies:
-  # GPU Specific Packages
-  - pytorch::pytorch=2.6.0  # Specifying channel explicitly
-  - pytorch::torchvision
-  - pytorch::torchaudio
-  - pytorch::pytorch-cuda=12.4  # Match your CUDA version
+  # GPU Specific Packages - explicitly excluding CPU builds
+  - pytorch::pytorch=2.6.0=*cuda*  # Force CUDA build with wildcard
+  - pytorch::torchvision=*cuda*
+  - pytorch::torchaudio=*cuda*
+  - pytorch::pytorch-cuda=12.4
   - gpytorch
   - torchgeo
   - catboost
@@ -17,8 +17,6 @@ dependencies:
   - pyvista-xarray
   - cupy
   - rapids
-  # Explicitly prevent CPU-only builds
-  - defaults::cudatoolkit
 # CIRRUS base CPU packages
   - argopy=0.1.14
   - arm_pyart=1.19.5
