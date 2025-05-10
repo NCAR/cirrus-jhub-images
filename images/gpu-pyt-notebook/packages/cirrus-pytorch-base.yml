@@ -6,10 +6,10 @@ channels:
   - rapidsai
 dependencies:
   # GPU Specific Packages - explicitly excluding CPU builds
-  - pytorch=2.5.1=*cuda*  # Force CUDA build with wildcard
+  - pytorch  # Force CUDA build with wildcard
   - torchvision
   - torchaudio
-  - pytorch-cuda=12.4
+  - pytorch-cuda
   - gpytorch
   - torchgeo
   - catboost
