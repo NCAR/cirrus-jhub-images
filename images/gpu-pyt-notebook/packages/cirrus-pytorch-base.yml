@@ -1,21 +1,24 @@
 name: cirrus-pytorch-base
 channels:
+  - pytorch
+  - nvidia
   - conda-forge
-  - pytorch
-  - rapidsai 
+  - rapidsai
 dependencies:
-# GPU  Specific Packages
-  - gpytorch
-  - pytorch
+  # GPU Specific Packages - explicitly excluding CPU builds
+  - pytorch  # Force CUDA build with wildcard
   - torchvision
-  - torchaudio 
+  - torchaudio
   - pytorch-cuda
+  - gpytorch
   - torchgeo
   - catboost
   - pyvista[all,trame]
   - pyvista-xarray
   - cupy
   - rapids
+  - cudatoolkit
+  - cudnn
 # CIRRUS base CPU packages
   - argopy=0.1.14
   - arm_pyart=1.19.5
