@@ -5,7 +5,7 @@ channels:
   - pytorch
   - rapidsai
 dependencies:
-  # TensorFlow and its CUDA dependencies
+  # GPU Packages
   - tensorflow
   - tensorflow-gpu
   - cudatoolkit  
