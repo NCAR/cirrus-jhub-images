@@ -6,10 +6,10 @@ channels:
   - rapidsai
 dependencies:
   # GPU Specific Packages - explicitly excluding CPU builds
-  - pytorch  # Force CUDA build with wildcard
-  - torchvision
-  - torchaudio
-  - pytorch-cuda
+  - pytorch::pytorch 
+  - pytorch::torchvision
+  - pytorch::torchaudio
+  - pytorch::pytorch-cuda 
   - gpytorch
   - torchgeo
   - catboost
@@ -47,7 +47,7 @@ dependencies:
   - fiona=1.10.1
   - flox=0.9.15
   - folium=0.19.4
-  - gdal=3.10.1
+  - gdal
   - geocat-comp=2024.04.0
   - geocat-viz=2024.03.0
   - geocube=0.7.1
@@ -85,7 +85,7 @@ dependencies:
   - netcdf4=1.7.2
   - numba=0.61.2
   - numcodecs=0.15.1
-  - numexpr=2.10.2
+  - numexpr
   - numpy=1.26.4
   - ocgis=2.1.1
   - pandas=2.2.3
@@ -93,7 +93,7 @@ dependencies:
   - papermill=2.6.0
   - pillow=11.1.0
   - pop-tools=2023.6.0
-  - pyarrow=20.0.0
+  - pyarrow
   - pydap=3.5.5
   - pygraphviz=1.14
   - pygrib=2.1.6
@@ -104,7 +104,7 @@ dependencies:
   - pystac-client=0.8.6
   - pytables=3.10.2
   - pyqt=5.15.10
-  - python=3.12.10
+  - python
   - python-graphviz=0.20.3
   - python-wget=3.2
   - rasterio=1.4.3
