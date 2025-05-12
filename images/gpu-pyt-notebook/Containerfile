@@ -145,7 +145,7 @@ RUN mamba env create -n ${CONDA_ENV} -f cirrus-pytorch-base.yml \
 # GPU TensorFlow config based on https://github.com/tensorflow/tensorflow/issues/58681
 RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh && \
     # Setup LD_LIBRARY_PATH to include CUDA libraries
-    echo 'export LD_LIBRARY_PATH=${CONDA_DIR}/lib/:/usr/lib/cuda/lib64' > ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
+    echo 'export LD_LIBRARY_PATH=${CONDA_USRDIR}/${CONDA_ENV}/lib/:${CONDA_DIR}/lib/:/usr/lib/cuda/lib64' > ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
     # Add CUDA environment variables
     echo 'export CUDA_HOME=/usr/lib/cuda' >> ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
     echo 'export PATH=$PATH:/usr/lib/cuda/bin' >> ${CONDA_DIR}/etc/conda/activate.d/env_vars.sh && \
