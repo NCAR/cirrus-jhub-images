@@ -1,22 +1,27 @@
 name: cirrus-tensorflow-base
 channels:
+  - nvidia
   - conda-forge
   - pytorch
-  - rapidsai 
-  - nvidia
+  - rapidsai
 dependencies:
-  # GPU/TensorFlow Specific Packages
+  # TensorFlow and its CUDA dependencies
+  - tensorflow
+  - tensorflow-gpu
+  - cudatoolkit  
+  - cudnn       
+  - cuda-nvcc
   - jax
+  - jaxlib=*=*cuda*
   - keras-cv
+  - keras
   - catboost
   - pyvista[all,trame]
   - pyvista-xarray
-  - tensorflow
-  - cudatoolkit
-  - cudnn
   - cupy
-  - cuda-nvcc
   - rapids
+  - gcc_linux-64
+  - gxx_linux-64
   # CIRRUS base CPU packages
   - argopy=0.1.14
   - arm_pyart=1.19.5
