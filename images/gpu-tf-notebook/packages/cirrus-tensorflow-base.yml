@@ -104,7 +104,7 @@ dependencies:
   - pynco=1.1.2
   - pystac=1.13.0
   - pystac-client=0.8.6
-  - pytables=3.10.2
+  - pytables
   - pyqt=5.15.10
   - python
   - python-graphviz=0.20.3
