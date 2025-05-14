@@ -14,7 +14,8 @@ nbdime==4.0.2
 nbgitpuller==1.2.2
 voila==0.5.8
 jupyterlab_nvdashboard==0.13.0
-tensorflow[and-cuda]==2.19.0
+tensorflow[and-cuda]
+tensorflow-gpu
 typing_extensions==4.13.2
 tensorflow-probability
 nvidia-cudnn-cu12
