@@ -17,4 +17,3 @@ jupyterlab_nvdashboard==0.13.0
 tensorflow[and-cuda]==2.19.0
 typing_extensions==4.13.2
 tensorflow-probability
-tensorflow-addons
