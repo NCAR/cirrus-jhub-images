@@ -63,7 +63,7 @@ dependencies:
   - globus-sdk=3.46.0
   - gsw=3.6.19
   - h5netcdf=1.5.0
-  - h5py=3.12.1
+  - h5py
   - holoviews=1.20.0
   - hvplot=0.11.2
   - intake=2.0.8
@@ -124,7 +124,7 @@ dependencies:
   - statsmodels=0.14.4
   - tobac=1.6.0
   - widgetsnbextension=4.0.14
-  - xarray=2025.4.0
+  - xarray
   - xesmf=0.8.10
   - xgcm=0.8.1
   - xrft=1.0.1
