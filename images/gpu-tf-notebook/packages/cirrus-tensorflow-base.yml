@@ -24,7 +24,7 @@ dependencies:
   - gxx_linux-64
   # CIRRUS base CPU packages
   - argopy=0.1.14
-  - arm_pyart=1.19.5
+  - arm_pyart
   - astropy=7.0.0
   - beautifulsoup4=4.12.3
   - bokeh=3.6.2
@@ -86,7 +86,7 @@ dependencies:
   - nbstripout=0.8.1
   - nc-time-axis=1.4.1
   - netcdf4=1.7.2
-  - numba=0.61.2
+  - numba
   - numcodecs=0.15.1
   - numexpr=2.10.2
   - numpy=1.26.4
