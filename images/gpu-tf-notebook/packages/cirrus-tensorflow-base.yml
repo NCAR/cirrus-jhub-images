@@ -12,7 +12,7 @@ dependencies:
   - cudnn       
   - cuda-nvcc
   - jax
-  - jaxlib=*cuda*
+  - jaxlib
   - keras-cv
   - keras
   - catboost
