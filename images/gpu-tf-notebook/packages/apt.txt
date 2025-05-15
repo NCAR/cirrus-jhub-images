@@ -1,6 +1,11 @@
 build-essential
 bzip2
 ca-certificates
+cuda-command-line-tools
+cuda-cudart
+cuda-libraries
+cuda-minimal-build
+cuda-toolkit
 curl
 cmake
 csh
@@ -13,6 +18,7 @@ gfortran
 git
 gnupg2
 graphviz
+libcudnn8
 libperl-dev
 libsnappy-dev
 libstdc++-12-dev
