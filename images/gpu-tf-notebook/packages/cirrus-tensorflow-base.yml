@@ -6,7 +6,7 @@ channels:
   - rapidsai
 dependencies:
   # GPU Packages 
-  - tensorflow
+  - tensorflow=2.16.1=cuda120py311h452d031_0
   - cudatoolkit  
   - cudnn       
   - cuda-nvcc
