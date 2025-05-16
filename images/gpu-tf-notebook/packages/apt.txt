@@ -13,6 +13,7 @@ gfortran
 git
 gnupg2
 graphviz
+libcudnn8
 libperl-dev
 libsnappy-dev
 libstdc++-12-dev
