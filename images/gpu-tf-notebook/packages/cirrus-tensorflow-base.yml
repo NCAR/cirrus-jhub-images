@@ -10,6 +10,7 @@ dependencies:
   - cudatoolkit  
   - cudnn       
   - cuda-nvcc
+  - __cuda
   - jax
   - jaxlib
   - keras
