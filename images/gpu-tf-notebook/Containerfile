@@ -98,7 +98,7 @@ RUN wget https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-
     && tar -xvf cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz \
     && cp cudnn-*-archive/include/cudnn*.h /usr/lib/cuda/include \
     && cp -P cudnn-*-archive/lib/libcudnn* /usr/lib/cuda/lib64 \
-    && chmod a+r /usr/local/cuda/include/cudnn*.h /usr/lib/cuda/lib64/libcudnn* \
+    && chmod a+r /usr/lib/cuda/include/cudnn*.h /usr/lib/cuda/lib64/libcudnn* \
     && rm -rf cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz cudnn-*-archive
 
 # Install latest mambaforge in ${CONDA_DIR}
