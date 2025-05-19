@@ -22,8 +22,8 @@ ENV CONDA_ENV=cirrus-tensorflow-base \
     CONDA_DIR=/srv/conda \
     CONDA_USRDIR=/srv/base-conda \
     # CUDA Settings
-    CUDNN_VERSION=9.10.1 \
-    CUDA_VERSION=12.9 \
+    CUDNN_VERSION=9.10.1.4 \
+    CUDA_VERSION=12 \
     # Tell apt-get to not block installs by asking for interactive human input
     DEBIAN_FRONTEND=noninteractive \
     JUPYTERHUB_VER=${JUPYTERHUB_VER} \
@@ -94,7 +94,7 @@ RUN mkdir -p "${CONDA_DIR}" && \
     fix-permissions "${CONDA_USRDIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-RUN wget https://developer.nvidia.com/downloads/compute/cudnn/secure/${CUDNN_VERSION}/local_installers/cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz \
+RUN wget https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-x86_64/cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz \
     && tar -xvf cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz \
     && cp cudnn-*-archive/include/cudnn*.h /usr/local/cuda/include \
     && cp -P cudnn-*-archive/lib/libcudnn* /usr/local/cuda/lib64 \
