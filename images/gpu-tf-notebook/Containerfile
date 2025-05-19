@@ -21,6 +21,9 @@ ENV CONDA_ENV=cirrus-tensorflow-base \
     # Install conda in the same place repo2docker does
     CONDA_DIR=/srv/conda \
     CONDA_USRDIR=/srv/base-conda \
+    # CUDA Settings
+    CUDNN_VERSION=9.10.1.4 \
+    CUDA_VERSION=12 \
     # Tell apt-get to not block installs by asking for interactive human input
     DEBIAN_FRONTEND=noninteractive \
     JUPYTERHUB_VER=${JUPYTERHUB_VER} \
@@ -30,6 +33,8 @@ ENV CONDA_ENV=cirrus-tensorflow-base \
     NB_GID=1000 \
     # Use /bin/bash as shell, not the default /bin/sh (arrow keys, etc don't work then)
     SHELL=/bin/bash \
+    # Add TZ configuration - https://github.com/PrefectHQ/prefect/issues/3061
+    TZ=UTC \
     # Setup locale to be UTF-8, avoiding gnarly hard to debug encoding errors
     LANG=C.UTF-8  \
     LC_ALL=C.UTF-8 \
@@ -89,9 +94,12 @@ RUN mkdir -p "${CONDA_DIR}" && \
     fix-permissions "${CONDA_USRDIR}" && \
     fix-permissions "/home/${NB_USER}"
 
-# Add TZ configuration - https://github.com/PrefectHQ/prefect/issues/3061
-ENV TZ=UTC
-# ========================
+RUN wget https://developer.download.nvidia.com/compute/cudnn/redist/cudnn/linux-x86_64/cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz \
+    && tar -xvf cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz \
+    && cp cudnn-*-archive/include/cudnn*.h /usr/lib/cuda/include \
+    && cp -P cudnn-*-archive/lib/libcudnn* /usr/lib/cuda/lib64 \
+    && chmod a+r /usr/lib/cuda/include/cudnn*.h /usr/lib/cuda/lib64/libcudnn* \
+    && rm -rf cudnn-linux-x86_64-${CUDNN_VERSION}_cuda${CUDA_VERSION}-archive.tar.xz cudnn-*-archive
 
 # Install latest mambaforge in ${CONDA_DIR}
 RUN echo "Installing Mambaforge..." \
