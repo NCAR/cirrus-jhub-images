@@ -10,16 +10,10 @@ dependencies:
   - cudatoolkit  
   - cudnn       
   - cuda-nvcc
-  - jax
-  - jaxlib
-  - keras
-  - catboost
   - pyvista[all,trame]
   - pyvista-xarray
   - cupy
   - rapids
-  - gcc_linux-64
-  - gxx_linux-64
   # CIRRUS base CPU packages
   - argopy
   - arm_pyart
