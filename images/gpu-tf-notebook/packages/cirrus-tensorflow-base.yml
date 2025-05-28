@@ -13,7 +13,6 @@ dependencies:
   - jax
   - jaxlib
   - keras
-  - keras-cv
   - catboost
   - pyvista[all,trame]
   - pyvista-xarray
