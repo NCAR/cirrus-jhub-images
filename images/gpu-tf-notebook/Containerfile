@@ -134,6 +134,8 @@ COPY --chown="${NB_UID}:${NB_GID}" configs/.init-condarc "${CONDA_DIR}/.condarc"
 # Create the conda envs with mamba to increase installation speed
 RUN mamba env create --name ${CONDA_ENV} -f cirrus-tensorflow-base.yml \
     && mamba clean -afy \
+    # Remove broken symlink
+    && find /srv/base-conda -name "libhwasan.so" -type l ! -exec test -e {} \; -delete \
     # Fix permissions
     && fix-permissions "${CONDA_DIR}" \
     && fix-permissions "${CONDA_USRDIR}" \
