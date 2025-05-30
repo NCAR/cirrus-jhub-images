@@ -6,22 +6,19 @@ channels:
   - rapidsai
 dependencies:
   # GPU Packages 
-  - tensorflow-gpu
-  - tensorflow-datasets
-  - cudatoolkit  
-  - cudnn       
+  - cuda-toolkit        
   - cuda-nvcc
-  #- pyvista[all,trame]
-  #- pyvista-xarray
-  #- cupy
-  #- rapids
+  - pyvista[all,trame]
+  - pyvista-xarray
+  - cupy
+  - rapids
   # CIRRUS base CPU packages
   - argopy
   - arm_pyart
   - astropy
   - beautifulsoup4
   - bokeh
-  - boto3
+#  - boto3
   - bottleneck
   - ca-certificates
   - cartopy
@@ -98,7 +95,7 @@ dependencies:
   - pystac
   - pystac-client
   - pyqt
-  - python
+  - python=3.11
   - python-graphviz
   - python-wget
   - rasterio
@@ -121,3 +118,7 @@ dependencies:
   - xgcm
   - xrft
   - zarr
+  - pip
+  - pip:
+    - tensorflow[and-cuda]>=2.12
+    - tensorflow-datasets
