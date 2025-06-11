@@ -6,6 +6,7 @@ name: JHub RDP Build & Push
 # Define the trigger that starts the action
 # For this workflow the trigger is on a push that changes anything in the images/base-notebook/ path
 on:
+  workflow_dispatch:
   push:
     paths:
       - images/rdp-notebook/**
