@@ -1,0 +1,17 @@
+name: cirrus-gpu
+channels:
+  - nvidia
+  - conda-forge
+  - pytorch
+  - rapidsai
+dependencies:
+  # GPU Packages 
+  - cuda-toolkit        
+  - cuda-nvcc
+  - pyvista[all,trame]
+  - pyvista-xarray
+  - cupy
+  - rapids
+  - pip:
+    - tensorflow[and-cuda]>=2.12
+    - tensorflow-datasets
