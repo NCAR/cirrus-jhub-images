@@ -1,0 +1,123 @@
+# This workflow builds docker images and pushes them to a Docker Hub Repository
+# This workflow is specific to the base-image directory and image
+# Set the workflow name
+name: Build and push prod images
+
+# Define the trigger that starts the action
+# For this workflow the trigger is on a push that changes anything in the images/base-image/ path
+on:
+  workflow_dispatch: 
+  push:
+    branches:
+      - main
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+permissions:
+  contents: read
+
+jobs:
+  build-push-base-image:
+    runs-on: gha-runner-cirrus-jhub-images
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v4
+      
+    - name: Save sha and tag 
+      run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+      run: echo "TAG=${{ github.ref }}" >> $GITHUB_ENV
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        platforms: linux/amd64
+        driver: remote
+        endpoint: tcp://buildkitd.arc-systems:1234
+
+    - name: registry login
+      uses: docker/login-action@v3
+      with:
+        registry: hub.k8s.ucar.edu
+        username: ${{ secrets.HARBOR_LOGIN }}
+        password: ${{ secrets.HARBOR_SECRET }}
+    - name: Build
+      uses: docker/build-push-action@v6
+      with:
+        context: notebook-images/
+        push: true
+        target: base
+        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-base:${{ github.ref }}
+        file: notebook-images/Containerfile
+        cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
+        cache-to: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache,image-manifest=true,mode=max"
+    
+  build-push-base-notebooks:
+    needs: build-push-base-image
+    runs-on: gha-runner-cirrus-jhub-images
+    strategy:
+      matrix:
+        target: [cpu-nb, gpu-nb]
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v4
+      
+    - name: Get short sha
+      run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        platforms: linux/amd64
+        driver: remote
+        endpoint: tcp://buildkitd.arc-systems:1234
+
+    - name: registry login
+      uses: docker/login-action@v3
+      with:
+        registry: hub.k8s.ucar.edu
+        username: ${{ secrets.HARBOR_LOGIN }}
+        password: ${{ secrets.HARBOR_SECRET }}
+    - name: Build
+      uses: docker/build-push-action@v6
+      with:
+        context: notebook-images/
+        push: true
+        target: ${{ matrix.target }}
+        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:${{ github.ref }}
+        file: notebook-images/Containerfile
+        cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
+  build-push-gpu-notebooks:
+    needs: build-push-base-notebooks
+    runs-on: gha-runner-cirrus-jhub-images
+    strategy:
+      matrix:
+        target: [tf-nb, torch-nb]
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v4
+      
+    - name: Get short sha
+      run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+      with:
+        platforms: linux/amd64
+        driver: remote
+        endpoint: tcp://buildkitd.arc-systems:1234
+
+    - name: registry login
+      uses: docker/login-action@v3
+      with:
+        registry: hub.k8s.ucar.edu
+        username: ${{ secrets.HARBOR_LOGIN }}
+        password: ${{ secrets.HARBOR_SECRET }}
+    - name: Build
+      uses: docker/build-push-action@v6
+      with:
+        context: notebook-images/
+        push: true
+        target: ${{ matrix.target }}
+        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:${{ github.ref }}
+        file: notebook-images/Containerfile
+        cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
