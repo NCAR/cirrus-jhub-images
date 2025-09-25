@@ -42,6 +42,7 @@ jobs:
     - name: Build
       uses: docker/build-push-action@v6
       with:
+        context: notebook-images/
         push: true
         target: base
         tags: hub.k8s.ucar.edu/khrpcek/jhub-base:latest,hub.k8s.ucar.edu/khrpcek/jhub-base:${{ env.SHORT_SHA }}
@@ -78,6 +79,7 @@ jobs:
     - name: Build
       uses: docker/build-push-action@v6
       with:
+        context: notebook-images/
         push: true
         target: ${{ matrix.target }}
         tags: hub.k8s.ucar.edu/khrpcek/jhub-${{ matrix.target }}:latest,hub.k8s.ucar.edu/khrpcek/jhub-base:${{ env.SHORT_SHA }}
@@ -112,6 +114,7 @@ jobs:
     - name: Build
       uses: docker/build-push-action@v6
       with:
+        context: notebook-images/
         push: true
         target: ${{ matrix.target }}
         tags: hub.k8s.ucar.edu/khrpcek/jhub-${{ matrix.target }}:latest,hub.k8s.ucar.edu/khrpcek/jhub-base:${{ env.SHORT_SHA }}
