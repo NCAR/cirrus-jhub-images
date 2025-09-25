@@ -8,8 +8,6 @@ name: Build and push prod images
 on:
   workflow_dispatch: 
   push:
-    branches:
-      - main
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
 
