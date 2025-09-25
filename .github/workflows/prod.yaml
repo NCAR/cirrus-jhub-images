@@ -45,7 +45,7 @@ jobs:
         context: notebook-images/
         push: true
         target: base
-        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-base:${{ github.ref }}
+        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-base:${{ github.ref_name }}
         file: notebook-images/Containerfile
         cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
         cache-to: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache,image-manifest=true,mode=max"
@@ -82,7 +82,7 @@ jobs:
         context: notebook-images/
         push: true
         target: ${{ matrix.target }}
-        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:${{ github.ref }}
+        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:${{ github.ref_name }}
         file: notebook-images/Containerfile
         cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
   build-push-gpu-notebooks:
@@ -117,6 +117,6 @@ jobs:
         context: notebook-images/
         push: true
         target: ${{ matrix.target }}
-        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:${{ github.ref }}
+        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:${{ github.ref_name }}
         file: notebook-images/Containerfile
         cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
