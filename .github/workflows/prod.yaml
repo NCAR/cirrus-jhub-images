@@ -16,7 +16,8 @@ permissions:
 
 jobs:
   build-push-base-image:
-    runs-on: gha-runner-cirrus-jhub-images
+    runs-on:
+      group: CIRRUS-4x8
     steps:
     - name: Check out the repo
       uses: actions/checkout@v4
