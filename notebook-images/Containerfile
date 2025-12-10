@@ -110,10 +110,10 @@ RUN echo "Installing Mambaforge..." \
 # bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
 RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
 
-# Install code-server
+# Install code-server for VSCode kernel
 RUN curl -fsSL https://code-server.dev/install.sh | sh && \
     fix-permissions "/home/${NB_USER}"
-    
+
 # Change to /tmp to work out
 WORKDIR /tmp
 
