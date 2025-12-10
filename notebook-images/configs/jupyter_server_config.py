@@ -71,3 +71,16 @@ c.CondaKernelSpecManager.env_filter = f'.*/srv/conda/*'
 
 ## Allow access to hidden files
 c.ContentsManager.allow_hidden = True
+
+## Add VSCode Kernel Launcher
+c.ServerProxy.servers = {
+    'vscode': {
+        'command': ['code-server', '--auth', 'none', '--bind-addr', '127.0.0.1:{port}', '/home/jovyan'],
+        'timeout': 30,
+        'absolute_url': False,
+        'launcher_entry': {
+            'title': 'VS Code',
+            'icon_path': '/vscode/static/src/browser/media/favicon.ico'
+        }
+    }
+}
