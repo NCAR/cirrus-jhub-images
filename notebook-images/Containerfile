@@ -112,6 +112,9 @@ RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" >
 
 # Install code-server for VSCode kernel
 RUN curl -fsSL https://code-server.dev/install.sh | sh && \
+    # Copy VS Code icon to Jupyter's static directory
+    mkdir -p /usr/local/share/jupyter/lab/static/vscode && \
+    cp /usr/lib/code-server/lib/vscode/resources/server/favicon.ico /usr/local/share/jupyter/lab/static/vscode/ && \
     fix-permissions "/home/${NB_USER}"
 
 # Change to /tmp to work out
