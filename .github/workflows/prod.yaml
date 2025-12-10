@@ -51,7 +51,8 @@ jobs:
     
   build-push-base-notebooks:
     needs: build-push-base-image
-    runs-on: gha-runner-cirrus-jhub-images
+    runs-on:
+      group: CIRRUS-4x8
     strategy:
       matrix:
         target: [cpu-nb, gpu-nb]
@@ -86,7 +87,8 @@ jobs:
         cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
   build-push-gpu-notebooks:
     needs: build-push-base-notebooks
-    runs-on: gha-runner-cirrus-jhub-images
+    runs-on:
+      group: CIRRUS-4x8
     strategy:
       matrix:
         target: [tf-nb, torch-nb]
