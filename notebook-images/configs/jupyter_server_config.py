@@ -80,7 +80,7 @@ c.ServerProxy.servers = {
         'absolute_url': False,
         'launcher_entry': {
             'title': 'VS Code',
-            'icon_path': '/vscode/static/src/browser/media/favicon.ico'
+            'icon_path': '/usr/lib/code-server/lib/vscode/extensions/microsoft-authentication/media/favicon.ico'
         }
     }
 }
