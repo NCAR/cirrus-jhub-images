@@ -79,9 +79,6 @@ RUN mkdir -p "${CONDA_DIR}" && \
     fix-permissions "${CONDA_DIR}" && \
     #fix-permissions "${CONDA_USRDIR}" && \
     fix-permissions "/home/${NB_USER}"
-#RUN mkdir -p "${CONDA_DIR}" && \
-#    fix-permissions "${CONDA_DIR}" && \
-#    fix-permissions "/home/${NB_USER}"
 
 # Add TZ configuration - https://github.com/PrefectHQ/prefect/issues/3061
 ENV TZ=UTC
@@ -139,6 +136,13 @@ COPY configs/.bashrc /etc/bash.bashrc
 
 # Copy the final condarc file over to define conda congiruation
 COPY --chown="${NB_UID}:${NB_GID}" configs/.condarc "${CONDA_DIR}/.condarc"
+
+# Add VSCode icon to the directory the kernel expects it
+RUN mkdir -p /srv/conda/share/jupyter/lab/static/icons && \
+    curl -L https://code.visualstudio.com/assets/branding/visual-studio-code-icons.zip \
+         -o /tmp/vscode-icons.zip && \
+    unzip -j /tmp/vscode-icons.zip "*/vscode.svg" -d /srv/conda/share/jupyter/lab/static/icons/ && \
+    rm /tmp/vscode-icons.zip
 
 # Make the conda environments we install read only and executable for the user
 # They can run the environments but will get permission denied when trying to make changes

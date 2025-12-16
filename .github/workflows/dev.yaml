@@ -120,6 +120,6 @@ jobs:
         context: notebook-images/
         push: true
         target: ${{ matrix.target }}
-        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:latest,hub.k8s.ucar.edu/cirrus-jhub/jhub-base:${{ env.SHORT_SHA }}
+        tags: hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:latest,hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:${{ env.SHORT_SHA }}
         file: notebook-images/Containerfile
-        cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-base:cache"
+        cache-from: "type=registry,ref=hub.k8s.ucar.edu/cirrus-jhub/jhub-${{ matrix.target }}:cache"
