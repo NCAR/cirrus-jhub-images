@@ -2,4 +2,6 @@
 
 exec "$@"
 
+useradd -u $NB_UID $NB_USER
+
 source /etc/profile.d/init_conda.sh
