@@ -1,8 +1,20 @@
-#!/bin/bash -l
-echo "Starting notebook server with UID: $NB_UID and GID: $NB_GID and user: $NB_USER"
-useradd -u $NB_UID $NB_USER
-sudo useradd -u $NB_UID $NB_USER
+#!/bin/bash
+set -e
 
-exec "$@"
+# Create group if it doesn't exist
+groupadd -g "${NB_GID}" "${NB_USER}" 2>/dev/null || true
 
-source /etc/profile.d/init_conda.sh
+# Add the user (this is what you asked for)
+useradd \
+  --uid "${NB_UID}" \
+  --gid "${NB_GID}" \
+  --create-home \
+  --home-dir "/home/${NB_USER}" \
+  --shell /bin/bash \
+  "${NB_USER}" 2>/dev/null || true
+
+# Fix permissions (especially important for NFS PVCs)
+chown -R "${NB_UID}:${NB_GID}" "/home/${NB_USER}"
+
+# Drop privileges and run JupyterHub
+exec gosu "${NB_USER}" jupyterhub-singleuser "$@"
