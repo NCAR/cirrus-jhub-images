@@ -15,6 +15,7 @@ useradd \
 
 # Fix permissions (especially important for NFS PVCs)
 chown -R "${NB_UID}:${NB_GID}" "/home/${NB_USER}"
+chown -R "${NB_UID}:${NB_GID}" "/home/jovyan"
 
 # Drop privileges and run JupyterHub
 #exec gosu "${NB_USER}" jupyterhub-singleuser "$@"
