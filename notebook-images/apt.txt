@@ -9,6 +9,7 @@ g++
 gcc
 gfortran
 git
+gosu
 graphviz
 libperl-dev
 libsnappy-dev
