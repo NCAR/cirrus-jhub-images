@@ -1,6 +1,7 @@
 #!/bin/bash -l
-echo "Starting notebook server with UID: $NB_UID and GID: $NB_GID"
+echo "Starting notebook server with UID: $NB_UID and GID: $NB_GID and user: $NB_USER"
 useradd -u $NB_UID $NB_USER
+sudo useradd -u $NB_UID $NB_USER
 
 exec "$@"
 
