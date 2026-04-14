@@ -1,7 +1,7 @@
 #!/bin/bash -l
+echo "Starting notebook server with UID: $NB_UID and GID: $NB_GID"
+useradd -u $NB_UID $NB_USER
 
 exec "$@"
-
-useradd -u $NB_UID $NB_USER
 
 source /etc/profile.d/init_conda.sh
