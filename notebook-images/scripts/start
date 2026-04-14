@@ -18,6 +18,6 @@ chown -R "${NB_UID}:${NB_GID}" "/home/${NB_USER}"
 
 # Drop privileges and run JupyterHub
 #exec gosu "${NB_USER}" jupyterhub-singleuser "$@"
-gosu ${NB_USER} exec "$@"
+gosu ${NB_USER} bash exec "$@"
 
 gosu ${NB_USER} source /etc/profile.d/init_conda.sh
