@@ -1,4 +1,4 @@
-name: cirrus-gpu
+name: cirrus-base
 channels:
   - nvidia
   - conda-forge
