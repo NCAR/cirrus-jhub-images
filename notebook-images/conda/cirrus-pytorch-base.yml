@@ -1,4 +1,4 @@
-name: cirrus-pytorch-base
+name: cirrus-base
 channels:
   - pytorch
   - nvidia
