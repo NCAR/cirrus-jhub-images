@@ -1,0 +1,22 @@
+#!/bin/bash
+set -e
+
+# Create group if it doesn't exist
+groupadd -g "${NB_GID}" "${NB_USER}" 2>/dev/null || true
+
+# Add the user (this is what you asked for)
+useradd \
+  --uid "${NB_UID}" \
+  --gid "${NB_GID}" \
+  --create-home \
+  --home-dir "/home/${NB_USER}" \
+  --shell /bin/bash \
+  "${NB_USER}" 2>/dev/null || true
+
+# Fix permissions (especially important for NFS PVCs)
+[ -e /home/${NB_USER} ] && chown -R "${NB_UID}:${NB_GID}" "/home/${NB_USER}"
+chown -R "${NB_UID}:${NB_GID}" "/home/jovyan"
+
+# Drop privileges and run JupyterHub
+#exec gosu "${NB_USER}" jupyterhub-singleuser "$@"
+gosu ${NB_USER} "$@"

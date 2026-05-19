@@ -1,0 +1,6 @@
+git
+groff
+tree
+vim
+nano
+gosu
