@@ -1,11 +1,9 @@
 # cirrus-jhub-images
-This repository is where Custom Jupyter images for use with the CISL CIRRUS JupyterHub are maintained and built via GitHub Actions on GitHub Actions Runner scale sets
+This repository is where Custom Jupyter images for use with the CISL CIRRUS JupyterHub are maintained and built via GitHub Actions on GitHub Actions Runner scale sets.
 
-| Image Name | Test Status | Image Push Status |
-|---|---|---|
-| **Jupyter Base image build** | ![Base Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-baseimg-test-build.yaml/badge.svg) | ![Base Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-baseimg-build-push.yaml/badge.svg) |
-| **Jupyter Singleuser CPU image build** | ![CPU Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-basenb-test-build.yaml/badge.svg) | ![CPU Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-basenb-build-push.yaml/badge.svg) |
-| **Jupyter RDP CPU image build** | ![RDP Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-rdpnb-test-build.yaml/badge.svg) | ![RDP Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-basenb-build-push.yaml/badge.svg) |
-| **Jupyter Podman image build** | ![Podman Image Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-podman-test-build.yaml/badge.svg) | ![Podman Image Build & Push Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-podman-build-push.yaml/badge.svg) |
-| **Jupyter Tensorflow GPU image builds** | ![Tensorflow Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-tfgpu-test-build.yaml/badge.svg) | ![Tensorflow Image Build & Push](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-tfgpu-build-push.yaml/badge.svg) |
-| **Jupyter PyTorch GPU image builds** | ![PyTorch Test Build Status](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-pytgpu-test-build.yaml/badge.svg) | ![PyTorch Image Build & Push](https://github.com/NCAR/ccpp-jhub-images/actions/workflows/jupyter-pytgpu-build-push.yaml/badge.svg) |
+Images are built with a matrix strategy across two workflows: **dev** (builds on push to `main` affecting `notebook-images/`, tags as `latest` + short SHA) and **prod** (builds on semver tag push `X.Y.Z`, tags with the release version). Each workflow builds the base image, then the CPU/GPU notebook images, then the TensorFlow/PyTorch GPU images.
+
+| Workflow | Status |
+|---|---|
+| **Build and push dev images** | ![Dev Build Status](https://github.com/NCAR/cirrus-jhub-images/actions/workflows/dev.yaml/badge.svg) |
+| **Build and push prod images** | ![Prod Build Status](https://github.com/NCAR/cirrus-jhub-images/actions/workflows/prod.yaml/badge.svg) |
