@@ -437,7 +437,6 @@ dependencies:
   - networkx=3.4.2
   - nlohmann_json=3.12.0
   - nomkl=1.0
-  - notebook=7.5.7
   - notebook-shim=0.2.4
   - nspr=4.36
   - nss=3.111
